@@ -66,6 +66,20 @@ export const AuthProvider = (props: any) => {
     }
   };
 
+  const deleteAccount = async () => {
+    const error: any = await AuthService.deleteAccount();
+    setError(error);
+  };
+
+  const updatePassword = async (password: any, confirmPassword: any) => {
+    if (password === confirmPassword) {
+      const error = await AuthService.updatePassword(password);
+      setError(error);
+    } else {
+      setError("Password does not match");
+    }
+  };
+
   const value = {
     user,
     error,
@@ -75,6 +89,8 @@ export const AuthProvider = (props: any) => {
     createUserWithEmailAndPassword,
     signInUserWithEmailAndPassword,
     resetPassword,
+    deleteAccount,
+    updatePassword,
   };
 
   return <authContext.Provider value={value} {...props} />;

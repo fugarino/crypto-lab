@@ -58,9 +58,7 @@ export const AuthService = {
     try {
       await firebase.auth().currentUser?.delete();
     } catch (e: any) {
-      return {
-        error: e.message,
-      };
+      return e.message;
     }
   },
   updatePassword: async (newPassword: any) => {
@@ -68,9 +66,7 @@ export const AuthService = {
       await firebase.auth().currentUser?.updatePassword(newPassword);
       return "Update done";
     } catch (e: any) {
-      return {
-        error: e.message,
-      };
+      return e.message;
     }
   },
 };
