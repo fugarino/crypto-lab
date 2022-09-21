@@ -39,7 +39,29 @@ export const AuthProvider = (props: any) => {
     }
   };
 
-  const value = { user, error, loginWithGoogle, logout, setUser, createUserWithEmailAndPassword };
+  const signInUserWithEmailAndPassword = async (email: any, password: any) => {
+    if (email && password) {
+      const { user, error } = await AuthService.signInUserWithEmailAndPassword(email, password);
+      if (error) {
+        setError(error);
+        return;
+      }
+      setUser(user ?? null);
+      setError("");
+    } else {
+      setError("Email and Password can not be empty");
+    }
+  };
+
+  const value = {
+    user,
+    error,
+    loginWithGoogle,
+    logout,
+    setUser,
+    createUserWithEmailAndPassword,
+    signInUserWithEmailAndPassword,
+  };
 
   return <authContext.Provider value={value} {...props} />;
 };
