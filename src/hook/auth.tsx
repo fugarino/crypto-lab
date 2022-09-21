@@ -53,6 +53,19 @@ export const AuthProvider = (props: any) => {
     }
   };
 
+  const resetPassword = async (email: any) => {
+    if (email) {
+      const error = await AuthService.resetPassword(email);
+      if (error) {
+        setError(error);
+        return;
+      }
+      router.push(`/verify?email=${email}`);
+    } else {
+      setError("Email can not be empty");
+    }
+  };
+
   const value = {
     user,
     error,
@@ -61,6 +74,7 @@ export const AuthProvider = (props: any) => {
     setUser,
     createUserWithEmailAndPassword,
     signInUserWithEmailAndPassword,
+    resetPassword,
   };
 
   return <authContext.Provider value={value} {...props} />;

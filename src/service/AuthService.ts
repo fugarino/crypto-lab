@@ -51,9 +51,7 @@ export const AuthService = {
         url: "http://localhost:3000/login",
       });
     } catch (e: any) {
-      return {
-        error: e.message,
-      };
+      return e.message;
     }
   },
   deleteAccount: async () => {
